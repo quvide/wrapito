@@ -1,0 +1,46 @@
+.ProfileRank
+{
+
+}
+
+.tier-icon
+{
+    width: 9rem;
+}
+
+.queue
+{
+    display: flex;
+
+    align-items: center;
+}
+
+.queue-meta
+{
+    margin-left: 1.5rem;
+}
+
+hr
+{
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.wins
+{
+    color: green;
+}
+
+.losses
+{
+    color: red;
+}
+
+.big-winrate
+{
+    font-size: 1.2rem;
+}
+
+.separator
+{
+    color: #777;
+}

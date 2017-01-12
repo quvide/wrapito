@@ -1,0 +1,52 @@
+.ProfileInfo
+{
+    display: flex;
+    flex-direction: row;
+
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.ProfileMeta
+{
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 1.5rem;
+}
+
+.ProfileIcon
+{
+    position: relative;
+}
+
+.profile-icon-big
+{
+    display: block;
+
+    width: 8rem;
+}
+
+.profile-icon-level
+{
+    font-size: 1.5rem;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    display: inline;
+
+    padding: .2rem;
+
+    color: white;
+    border-top-left-radius: 6px;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+span.summoner-big
+{
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 3rem;
+    color: black;
+}

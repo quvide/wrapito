@@ -1,0 +1,15 @@
+.team-red {
+  background-color: rgb(255, 208, 208);
+}
+
+.team-blue {
+  background-color: rgb(208, 225, 255);
+}
+
+.LiveGame {
+  display: flex;
+}
+
+.Team {
+  width: 100%;
+}
