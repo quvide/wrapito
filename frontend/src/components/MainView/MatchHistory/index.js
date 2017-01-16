@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import "./style.css";
 
 class ChampionIcon extends Component {
-	render() {
-		return (
+  render() {
+    return (
       <div>
         <img className="ChampionIcon" src={`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${this.props.path}`} alt="Champion Icon"/>
       </div>
     );
-	}
+  }
 }
 
 class PlayerStats extends Component {
@@ -59,15 +59,75 @@ class SummonerSpell extends Component {
   }
 }
 
+class Item extends Component {
+  render() {
+    let url;
+
+    if (this.props.image) {
+      url = `http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${this.props.image}`;
+    } else {
+      url = "";
+    }
+
+    return <img className="Item" src={url} alt="item"/>
+  }
+}
+
+class Items extends Component {
+  render() {
+    return (
+      <div className="Items">
+        <div className="real-items">
+          {this.props.items.map((item, index) => {
+            if (item) {
+              return <Item image={this.props.staticItems[item].image.full} />
+            } else {
+              return <div className="dummy-item"></div>
+            }
+          })}
+        </div>
+
+        <Item image={this.props.trinket ? this.props.staticItems[this.props.trinket].image.full : ""} />
+      </div>
+    );
+  }
+}
+
+class Side extends Component {
+  render() {
+    return (
+      <div className="Side">
+        {this.props.players.map((item, index) => {
+          return <div>{item.summonerId}</div>;
+        })}
+      </div>
+    )
+  }
+}
+
+class Champions extends Component {
+  render() {
+    let blue = this.props.summoners.filter((item, index) => {return item.teamId === 100;});
+    let purple = this.props.summoners.filter((item, index) => {return item.teamId === 200;});
+
+    return (
+      <div className="Champions">
+        <Side players={blue} />
+        <Side players={purple} />
+      </div>
+    )
+  }
+}
+
 class Match extends Component {
-	render() {
-		const game = this.props.game;
+  render() {
+    const game = this.props.game;
     const staticData = this.props.staticData;
-		return (
-			<div className={game.stats.win ? 'Match match-win' : 'Match match-lose'}>
+    return (
+      <div className={game.stats.win ? 'Match match-win' : 'Match match-lose'}>
         <div className="flex-container">
           <div>
-				    <ChampionIcon path={staticData.champions[game.championId].image.full} />
+            <ChampionIcon path={staticData.champions[game.championId].image.full} />
             <QueueName que={game.subType} />
             <div className="TimePlayed">{(game.stats.timePlayed/60).toFixed(0)}m</div>
           </div>
@@ -81,10 +141,13 @@ class Match extends Component {
             <PlayerStats stats={game.stats} />
           </div>
 
+          <Items staticItems={staticData.items} items={[game.stats.item0, game.stats.item1, game.stats.item2, game.stats.item3, game.stats.item4, game.stats.item5]} trinket={game.stats.item6} />
+
+          <Champions staticChampion={staticData.champions} summoners={game.fellowPlayers} />
         </div>
-			</div>
-		);
-	}
+      </div>
+    );
+  }
 }
 
 class MatchHistory extends Component {
